@@ -23,7 +23,7 @@ produtos = {
         "preco": 2000000.0,
         "ano": "10/12/2019",
         "descricao": "Carro Esportivo marcado por sua fama e praticidade"
-    }  
+    }
 }
 
 
@@ -96,7 +96,7 @@ def listar_produtos():
     janela_listar.geometry("500x400")
 
     texto = tk.Text(janela_listar, wrap="word", font=("Arial", 10))
-    texto.pack(expand=True, fill="both", padding=10)
+    texto.pack(expand=True, fill="both", padx=10, pady=10)
 
     if produtos["p1"]["nome"] == "" and produtos["p2"]["nome"] == "" and produtos["p3"]["nome"] == "":
         texto.insert("end", "Nenhum produto cadastrado no sistema ainda.\n")
@@ -110,7 +110,7 @@ def listar_produtos():
 
 
 def realizar_venda():
-    def efetuar_venda():
+    def efetuará_venda():
         nome_venda = entry_nome_venda.get().strip()
         
         if produtos["p1"]["nome"] == "" and produtos["p2"]["nome"] == "" and produtos["p3"]["nome"] == "":
@@ -119,7 +119,7 @@ def realizar_venda():
 
         encontrado = False
         for p in ["p1", "p2", "p3"]:
-            if nome_venda.lower() == produtos[p]["nome"].lower() and produtos[p]["nome"] != "":
+            if nome_venda.lower() == produtos[p]["nome"].lower().strip() and produtos[p]["nome"] != "":
                 encontrado = True
                 try:
                     qtd_venda = int(entry_qtd_venda.get())
@@ -151,7 +151,7 @@ def realizar_venda():
     entry_qtd_venda = tk.Entry(janela_venda, width=10)
     entry_qtd_venda.pack(pady=5)
 
-    tk.Button(janela_venda, text="Confirmar Venda", command=efetuar_venda, bg="#2196F3", fg="white").pack(pady=10)
+    tk.Button(janela_venda, text="Confirmar Venda", command=efetuará_venda, bg="#2196F3", fg="white").pack(pady=10)
 
 
 def buscar_por_ano():
@@ -203,10 +203,9 @@ def documentacao_carros():
         
         janela_doc.destroy()
         
-        
         janela_texto = tk.Toplevel(root)
         janela_texto.title("Documentação Oficial")
-        tk.Label(janela_texto, text=texto_doc, justify="left", padding=15, font=("Arial", 10)).pack()
+        tk.Label(janela_texto, text=texto_doc, justify="left", padx=15, pady=15, font=("Arial", 10)).pack()
 
     janela_doc = tk.Toplevel(root)
     janela_doc.title("Acessar Documentação")
@@ -237,13 +236,10 @@ def financiamento():
     messagebox.showinfo("Financiamento", texto)
 
 
-
-
 root = tk.Tk()
 root.title("Sistema de Vendas - Indústria de Automóveis")
 root.geometry("500x550")
 root.configure(bg="#f0f0f0")
-
 
 label_titulo = tk.Label(
     root, 
@@ -253,7 +249,6 @@ label_titulo = tk.Label(
     fg="#333"
 )
 label_titulo.pack(pady=20)
-
 
 estilo_botao = {
     "font": ("Arial", 11),
@@ -265,7 +260,6 @@ estilo_botao = {
     "activebackground": "#e0e0e0"
 }
 
-# Botões correspondentes a cada opção original do seu menu
 tk.Button(root, text="1 - Cadastrar produto", command=cadastrar_produto, **estilo_botao).pack(pady=4)
 tk.Button(root, text="2 - Listar produtos", command=listar_produtos, **estilo_botao).pack(pady=4)
 tk.Button(root, text="3 - Realizar venda", command=realizar_venda, **estilo_botao).pack(pady=4)
@@ -276,15 +270,11 @@ tk.Button(root, text="7 - Documentação dos carros", command=documentacao_carro
 tk.Button(root, text="8 - Formas de pagamento", command=formas_pagamento, **estilo_botao).pack(pady=4)
 tk.Button(root, text="9 - Financiamento", command=financiamento, **estilo_botao).pack(pady=4)
 
-# Linha divisória visual
 tk.Label(root, text="--------------------------------------", bg="#f0f0f0", fg="#aaa").pack(pady=10)
 
-# Botão Sair
 tk.Button(root, text="0 - Sair", command=root.quit, font=("Arial", 11, "bold"), width=35, bg="#d32f2f", fg="white", bd=0).pack(pady=4)
 
-# Rodapé
 label_rodape = tk.Label(root, text="Modo GUI Ativo", font=("Arial", 8), bg="#f0f0f0", fg="#888")
 label_rodape.pack(side="bottom", pady=5)
 
-# Executa o loop do aplicativo Tkinter
 root.mainloop()
